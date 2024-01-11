@@ -15,7 +15,8 @@
     "react-dom": "^18.2.0",
     "react-scrollspy-navigation": "^1.0.3",
     "react-ui-scrollspy": "^2.3.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.1",
+    "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

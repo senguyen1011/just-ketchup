@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button, Card, Container, Flex, Grid, Heading, Text, Image } from '../../components';
-import {  Carousel } from '../components';
+import { Carousel } from '../components';
 
 const Work = () => {
   return (
@@ -11,13 +11,13 @@ const Work = () => {
     >
       <Grid
         alignItems='center'
-        columns='1fr 3fr 1fr'
-        gap='10'
+        columns='1fr 0.25fr 2.5fr 0.25fr 1fr'
       >
         <Card id='workDescription'>
           <Flex
             direction='column'
             justifyContent='space-between'
+            gap='8'
           >
             <Flex
               direction='column'
@@ -48,35 +48,42 @@ const Work = () => {
             </Flex>
           </Flex>
         </Card>
+        <WorkLine />
         <Carousel>
-          {[
-            'fear-hunger-1.jpg',
-            'fear-hunger-2.jpg',
-            'fear-hunger-3.jpg',
-          ].map((fileName, ind) => (
-            <CarouselImage
-              name={fileName}
-              alt={fileName}
-              key={`image-${ind}`}
-            />
-          ))}
+          {['fear-hunger-1.jpg', 'fear-hunger-2.jpg', 'fear-hunger-3.jpg'].map(
+            (fileName, ind) => (
+              <CarouselImage
+                name={fileName}
+                alt={fileName}
+                key={`image-${ind}`}
+              />
+            )
+          )}
         </Carousel>
+        <WorkLine />
         <Card id='workUpdates'>
           <Flex
             direction='column'
             justifyContent='space-between'
+            gap='8'
           >
             <Flex
               direction='column'
               gap='4'
             >
               <Flex direction='column'>
-                <Heading size='3'>Fear & Hunger</Heading>
+                <Heading size='3'>Latest Update</Heading>
                 <Heading
                   size='5'
                   color='textSecondary'
                 >
-                  In development
+                  Dec 7, 2023 -{' '}
+                  <Text
+                    color='textAccent'
+                    style={{ display: 'inline-block' }}
+                  >
+                    v0.1.2
+                  </Text>
                 </Heading>
               </Flex>
               <Text>
@@ -88,10 +95,7 @@ const Work = () => {
               direction='column'
               gap='4'
             >
-              <Flex direction='column'>
-                <Heading size='4'>Tags</Heading>
-              </Flex>
-              <Button color='accent'>PURCHASE</Button>
+              <Button color='accent'>READ THE CHANGELOGS</Button>
             </Flex>
           </Flex>
         </Card>
@@ -108,5 +112,11 @@ const CarouselImage = styled(Image)`
   width: 100%;
   border-radius: ${props => props.theme.radius['2']};
   box-shadow: ${props => props.theme.shadow['3']};
+`;
+
+const WorkLine = styled.div`
+  width: 100%;
+  border-top: 2px solid ${props => props.theme.color['gray']['border']};
+  z-index: -100;
 `;
 export { Work };

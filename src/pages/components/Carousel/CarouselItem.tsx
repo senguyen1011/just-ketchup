@@ -32,7 +32,7 @@ const CarouselItem = ({
   let translateY = 0;
   let scaleEnter = distanceFactor;
   let scaleExit = distanceFactor;
-  
+
   if (offset > 0) {
     translateY += yOffset;
     scaleEnter = distanceFactor * distanceFactor;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
-import { Flex, Button } from '../../../components';
+import { AnimatePresence } from 'framer-motion';
+import { Flex, Button, Icon } from '../../../components';
 import { CarouselItem } from './CarouselItem';
 
 interface CarouselProps {
@@ -34,10 +34,16 @@ const Carousel = ({ children = [], radius = 1 }: CarouselProps) => {
       justifyContent='center'
       width='100%'
       height='auto'
-      style={{ position: 'relative'}}
+      style={{ position: 'relative' }}
     >
-      <Button onClick={() => handlePaginate(-1)}>Prev</Button>
-      <Button onClick={() => handlePaginate(1)}>Next</Button>
+      <ButtonWrapper>
+        <PaginateButton onClick={() => handlePaginate(-1)}>
+          <Icon name='expandLess' />
+        </PaginateButton>
+        <PaginateButton onClick={() => handlePaginate(1)}>
+          <Icon name='expandMore' />
+        </PaginateButton>
+      </ButtonWrapper>
       <CarouselContainer>
         <AnimatePresence>
           {getVisibleChildren().map((child, ind) => {
@@ -45,7 +51,7 @@ const Carousel = ({ children = [], radius = 1 }: CarouselProps) => {
               <CarouselItem
                 radius={radius}
                 itemInd={ind}
-                key={`item-${ind}`}
+                key={`item-${typeof child === 'string' ? child : child.props.name}`}
                 isForward={isForward}
               >
                 {child}
@@ -70,11 +76,31 @@ const CarouselContainer = styled.div`
   align-items: center;
 `;
 
+
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  z-index: 5;
+`;
+
+const PaginateButton = styled(Button)`
+  border-radius: ${props => props.theme.radius['full']};
+  width: 3em;
+  height: 3em;
+`;
+
 const HiddenChild = styled.div`
   pointer-events: none;
   visibility: hidden;
   width: 100%;
   height: 100%;
-`
+`;
 
 export { Carousel };

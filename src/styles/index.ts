@@ -363,6 +363,7 @@ const radii = {
   '4': '10px',
   '5': '12px',
   '6': '16px',
+  'full': '999px',
 };
 
 const breakpoints = {
