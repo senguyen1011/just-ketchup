@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Button, Card, Container, Flex, Grid, Heading, Text, Image } from '../../components';
 import {  Carousel } from '../components';
-import { motion } from 'framer-motion';
 
 const Work = () => {
   return (
@@ -54,15 +53,12 @@ const Work = () => {
             'fear-hunger-1.jpg',
             'fear-hunger-2.jpg',
             'fear-hunger-3.jpg',
-            'fear-hunger-4.jpg',
           ].map((fileName, ind) => (
             <CarouselImage
-            as={motion(Image)}
               name={fileName}
               alt={fileName}
               key={`image-${ind}`}
             />
-            // fileName
           ))}
         </Carousel>
         <Card id='workUpdates'>

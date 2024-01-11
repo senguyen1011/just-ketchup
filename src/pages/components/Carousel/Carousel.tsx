@@ -12,23 +12,22 @@ interface CarouselProps {
 const Carousel = ({ children = [], radius = 1 }: CarouselProps) => {
   const [itemInd, setItemInd] = useState<number>(0);
   const [isForward, setForward] = useState<boolean>(true);
-  const modForChildren = (ind: number) => {
+  const lengthMod = (ind: number) => {
     return ((ind % children.length) + children.length) % children.length;
   };
 
   const getVisibleChildren = () => {
     const res = [];
     for (let ind = -radius; ind <= radius; ind++) {
-      res.push(children[modForChildren(itemInd + ind)]);
+      res.push(children[lengthMod(itemInd + ind)]);
     }
     return res;
   };
 
   const handlePaginate = (dir: number) => {
-    setItemInd(modForChildren(itemInd + dir));
+    setItemInd(lengthMod(itemInd + dir));
     setForward(dir > 0);
   };
-
   return (
     <Flex
       direction='column'

@@ -30,10 +30,17 @@ const CarouselItem = ({
   const yOffset = yConstant * (Math.abs(offset) / (radius + 1));
   const topPosition = radius === 0 ? 0 : offset * yConstant;
   let translateY = 0;
+  let scaleEnter = distanceFactor;
+  let scaleExit = distanceFactor;
+  
   if (offset > 0) {
     translateY += yOffset;
+    scaleEnter = distanceFactor * distanceFactor;
+    scaleExit = 1 - Math.abs((offset - 1) / (radius + 1)) / 4;
   } else if (offset < 0) {
     translateY -= yOffset;
+    scaleEnter = 1 - Math.abs((offset + 1) / (radius + 1)) / 4;
+    scaleExit = distanceFactor * distanceFactor;
   }
   return (
     <ItemWrapper
@@ -42,11 +49,11 @@ const CarouselItem = ({
         top: `${topPosition}%`,
       }}
       initial={{
-        transform: `translateY(${
-          translateY + (isForward ? yConstant : -yConstant)
-        }%) scale(${distanceFactor})`,
+        transform: `translateY(${translateY + (isForward ? yConstant : -yConstant)}%) scale(${
+          isForward ? scaleEnter : scaleExit
+        })`,
         opacity: 0,
-        filter: 'blur(4px)',
+        filter: 'blur(2px)',
       }}
       animate={{
         transform: `translateY(${translateY}%) scale(${distanceFactor})`,
@@ -54,11 +61,11 @@ const CarouselItem = ({
         filter: `blur(${Math.abs(offset * 2)}px)`,
       }}
       exit={{
-        transform: `translateY(${
-          translateY + (isForward ? -yConstant : yConstant)
-        }%) scale(${distanceFactor})`,
+        transform: `translateY(${translateY + (isForward ? -yConstant : yConstant)}%) scale(${
+          isForward ? scaleExit : scaleEnter
+        })`,
         opacity: 0,
-        filter: 'blur(4px)',
+        filter: 'blur(2px)',
       }}
       key={`carousel-item-${typeof children === 'string' ? children : children.props.name}`}
     >
