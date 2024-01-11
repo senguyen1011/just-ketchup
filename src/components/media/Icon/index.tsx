@@ -33,13 +33,12 @@ interface IconProps extends React.ComponentPropsWithoutRef<'span'> {
 
 const Icon = ({ name, size, color }: IconProps) => {
   const { loading, SvgIcon } = useSvgImport(name);
-  
+  console.log(SvgIcon);
   return !loading && SvgIcon ? (
     <IconWrapper
       size={size}
       color={color}
     >
-      {/* {SvgIcon.default} */}
       <SvgIcon />
     </IconWrapper>
   ) : (
