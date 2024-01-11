@@ -35,7 +35,6 @@ const CarouselItem = ({
   } else if (offset < 0) {
     translateY -= yOffset;
   }
-
   return (
     <ItemWrapper
       style={{
@@ -47,22 +46,21 @@ const CarouselItem = ({
           translateY + (isForward ? yConstant : -yConstant)
         }%) scale(${distanceFactor})`,
         opacity: 0,
-        
-        filter: 'blur(4px)'
+        filter: 'blur(4px)',
       }}
       animate={{
         transform: `translateY(${translateY}%) scale(${distanceFactor})`,
         opacity: distanceFactor * distanceFactor,
-        filter: `blur(${Math.abs(offset * 2)}px)`
+        filter: `blur(${Math.abs(offset * 2)}px)`,
       }}
       exit={{
         transform: `translateY(${
           translateY + (isForward ? -yConstant : yConstant)
         }%) scale(${distanceFactor})`,
         opacity: 0,
-        filter: 'blur(4px)'
+        filter: 'blur(4px)',
       }}
-      key={`item-${itemInd}`}
+      key={`carousel-item-${typeof children === 'string' ? children : children.props.name}`}
     >
       {children}
     </ItemWrapper>
